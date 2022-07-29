@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <title>BRaNT</title>
+    <link rel="icon" href="https://www.arditi.pt/images/Logos/BRaNT.png">
+</head>
+
+<%- include ("partials/header") %>
+
+    <img src="https://saocarlosemrede.com.br/wp-content/uploads/2020/01/placeholder-1200x500-1.png"
+        class="img-fluid image_cover">
+    <% about_us.forEach(function(about_us){ %>
+    <div class="container marketing mt-5">
+        <a href="/brant"><i class="bi bi-caret-left-fill" id="return_icon"></i></a>
+        <br><br>
+        <label class="text_color_claret">Edit About us</label>
+        <form action="/edit_about_us/<%=about_us._id%>?_method=PUT" method="post">
+            <div class="form-group">
+                <label for="Objectives">Objectives</label>
+                <textarea class="form-control mb-5" id="objectives" name="objectives"
+                    rows="12"><%=about_us.objectives%></textarea>
+            </div>
+            <div class="form-group">
+                <label for="Mission">Mission</label>
+                <textarea class="form-control mb-5" id="Mission" name="mission"
+                    rows="12"><%=about_us.mission%></textarea>
+            </div>
+            <div class="form-group">
+                <label for="StructuralOrganization">Structural Organization</label>
+                <textarea class="form-control mb-5" id="structural_org" name="structural_org"
+                    rows="12"><%=about_us.structural_org%></textarea>
+            </div>
+            <label class="text_color_claret">Edit Footer</label>
+            <div class="form-group">
+                <label for="FooterAbout">About</label>
+                <textarea class="form-control mb-4" id="about" name="about"
+                    rows="2"><%=about_us.about%></textarea>
+            </div>
+            <div class="form-group mb-4">
+                <label for="Adress">Adress</label>
+                <input type="text" class="form-control" id="adress" name="adress" placeholder="Enter adress"
+                    value="<%=about_us.adress%>">
+            </div>
+            <div class="form-group mb-4">
+                <label for="Email">Email</label>
+                <input type="text" class="form-control" id="email" name="email" placeholder="Enter email"
+                    value="<%=about_us.email%>">
+            </div>
+            <div class="row mb-4">
+                <div class="col">
+                    <label for="Phone1">Phone 1</label>
+                    <input type="tel" class="form-control" id="phone1" name="phone1" placeholder="Enter phone 1"
+                        value="<%=about_us.phone1%>">
+                </div>
+                <div class="col">
+                    <label for="Phone2">Phone 2</label>
+                    <input type="tel" class="form-control" id="phone2" name="phone2" placeholder="Enter phone 2"
+                        value="<%=about_us.phone2%>">
+                </div>
+            </div>
+            <label for="Phone2">Social Links</label>
+            <div class="row mb-3">
+                <div class="col">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1"><i class="bi bi-facebook"></i></span>
+                        </div>
+                        <input type="url" class="form-control" id="facebook" name="facebook" placeholder="facebook">
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1"><i class="bi bi-youtube"></i></span>
+                        </div>
+                        <input type="url" class="form-control" id="youtube" name="youtube" placeholder="youtube">
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-5">
+                <div class="col">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1"><i class="bi bi-twitter"></i></span>
+                        </div>
+                        <input type="url" class="form-control" id="twitter" name="twitter" placeholder="twitter">
+                    </div>
+                </div>
+                <div class="col">
+                </div>
+            </div>
+            <button type="submit" class="btn btn-success">Submit</button>
+        </form>
+        <br>
+    </div>
+    <% });%>
+
+    <%- include ("partials/footer") %>

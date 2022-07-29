@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <title>BRaNT</title>
+    <link rel="icon" href="https://www.arditi.pt/images/Logos/BRaNT.png">
+</head>
+
+<%- include ("partials/header") %>
+
+    <img src="https://saocarlosemrede.com.br/wp-content/uploads/2020/01/placeholder-1200x500-1.png"
+        class="img-fluid image_cover">
+    <div class="container marketing mt-5">
+        <label class="text_color_claret">Team</label>
+        <br>
+        <% if(auth){ %>
+            <button type="button" class="btn btn-success" onclick="window.location.href='add_team_member'"><i
+                    class="bi bi-person-plus-fill"></i>&ensp;Add member
+            </button>
+            <% } %>
+                <div class="form">
+                    <input type="text" class="form-control mb-5 w-50" id="input_search" placeholder="Search here">
+                </div>
+                <div class="row" id="member">
+                    <% members.forEach(function(member) { %>
+                        <div class="mb-5 col-lg-4">
+                            <img class="rounded-circle mb-3" width="140" height="140" src="data:image/<%=member.img.contentType%>;base64,
+                        <%=member.img.data.toString('base64')%>" data-holder-rendered="true">
+                            <h4>
+                                <%= member.name %>
+                            </h4>
+                            <p>
+                                <%= member.area %>
+                            </p>
+                            <p><a class="btn btn-secondary team_button" href="/team/<%=member._id%>">View Profile
+                                    &raquo;</a>
+                            </p>
+                        </div>
+                    <% }) %>
+                </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $("#input_search").on("keyup", function () {
+                var input = $(this).val().toLowerCase();
+                $("#member h4").filter(function () {
+                    $(this).parent().toggle($(this).text().toLowerCase().indexOf(input) > -1)
+                });
+            });
+        });
+    </script>
+    <%- include ("partials/footer") %>

@@ -1,0 +1,66 @@
+.card {
+    border-radius: 10px;
+    margin-bottom: 1.5rem;
+}
+
+.publications_tittle {
+    font-size: 17.5px;
+    font-weight: bold;
+}
+
+.publications_date {
+    color: grey;
+    font-size: 14px;
+}
+
+.publications_info_date_type {
+    color: grey;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.publications_authors {
+    font-size: 15px;
+}
+
+
+
+.publications_authors b {
+    color: #762933;
+}
+
+
+.card:hover {
+    border: 3px solid #762933 !important;
+    border-radius: 10px;
+}
+
+.publication_card a,
+.publication_card a:hover,
+.publication_card a:focus,
+.publication_card a:active {
+    text-decoration: none;
+    color: inherit;
+}
+
+.publication_tittle {
+    font-weight: bold;
+    font-size: 26px;
+    text-align: center;
+}
+
+.publication_abstract {
+    font-size: 15px;
+    text-align: justify;
+    white-space: pre-wrap;
+}
+
+#url {
+    font-size: 16px;
+    color: #762933;
+    font-weight: bolder;
+}
+
+#url:hover {
+    color: #762933;
+}

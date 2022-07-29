@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/member_profile.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <title>BRaNT</title>
+    <link rel="icon" href="https://www.arditi.pt/images/Logos/BRaNT.png">
+</head>
+
+<%- include ("partials/header") %>
+
+    <img src="https://saocarlosemrede.com.br/wp-content/uploads/2020/01/placeholder-1200x500-1.png"
+        class="img-fluid image_cover">
+    <section class="section about-section gray-bg" id="about">
+        <div class="container">
+            <a href="/team"><i class="bi bi-caret-left-fill" id="return_icon"></i></a>
+            <br><br>
+            <% if(auth){ %>
+            <div class="text-right">
+                <button type="button" class="btn btn-primary" onclick="window.location.href='/edit_team_member/<%=member_profile._id%>'"><i class="bi bi-pen"></i>&ensp;Edit</button>
+                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirm_delete"><i
+                        class="bi bi-trash"></i>&ensp;Delete</button>
+            </div>
+            <% } %>
+            <div class="row align-items-center flex-row-reverse">
+                <div class="col-lg-8">
+                    <div class="about-text go-to">
+                        <div class="dark-color">
+                            <%=member_profile.name%>
+                        </div>
+                        <div class="media">
+                            <p>
+                                <%=member_profile.area%>
+                            </p>
+                        </div>
+                        <div class="row about-list">
+                            <div class="col-md-6">
+                                <div class="media">
+                                    <label>Country</label>
+                                    <p>
+                                        <%=member_profile.country%>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="media">
+                                    <label>E-mail</label>
+                                    <p>
+                                        <%=member_profile.email%>
+                                    </p>
+                                </div>
+                                <div class="media">
+                                    <label>Phone</label>
+                                    <p><%=member_profile.phone%></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="about-avatar">
+                        <img src="data:image/<%=member_profile.img.contentType%>;base64,
+                        <%=member_profile.img.data.toString('base64')%>" title="" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="about_me">
+                <div class="dark-color_about">
+                    About
+                </div>
+                <div class="about_content">
+                    <%=member_profile.about%>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <% if(auth){ %>
+    <div class="modal fade" id="confirm_delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Delete Profile</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body modal-delete-message">
+                    <b class="text-danger">Delete</b> "<%=member_profile.name%>" profile ?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <form action="/team/<%=member_profile._id%>?_method=DELETE" method="post">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <% } %>
+
+    <%- include ("partials/footer") %>

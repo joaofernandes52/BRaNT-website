@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/publications.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <title>BRaNT</title>
+    <link rel="icon" href="https://www.arditi.pt/images/Logos/BRaNT.png">
+</head>
+
+<%- include ("partials/header") %>
+
+    <img src="https://saocarlosemrede.com.br/wp-content/uploads/2020/01/placeholder-1200x500-1.png"
+        class="img-fluid image_cover">
+    <div class="container marketing mt-5">
+        <label class="text_color_claret">Activities</label>
+        <br>
+        <% if(auth){ %>
+            <button type="button" class="btn btn-success" onclick="window.location.href='add_activitie'"><i
+                    class="bi bi-robot"></i>&ensp;Add activitie
+            </button>
+            <% } %>
+                <input type="text" class="form-control mb-5 w-50" id="input_search" placeholder="Search here">
+                <% activities.forEach(function(activities) { %>
+                    <div class="publication_card">
+                        <a href="/activities/<%=activities._id%>">
+                            <div class="card shadow">
+                                <div class="card-body">
+                                    <div class="search publications_date text-right">
+                                        <%=activities.date%>
+                                    </div>
+                                    <div class="search publications_tittle mb-3">
+                                        <%=activities.tittle%>
+                                    </div>
+                                    <div class="search publications_authors">
+                                        <b>Participations : </b>
+                                        <%=activities.participations%>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                <% }); %>
+    </div>
+    <script>
+        $(document).ready(function () {
+            $("#input_search").on("keyup", function () {
+                var input = $(this).val().toLowerCase();
+                $(".card-body").filter(function () {
+                    $(this).parent().parent().toggle($(this).text().toLowerCase().indexOf(input) > -1)
+                });
+            });
+        });
+
+    </script>
+
+
+    <%- include ("partials/footer") %>

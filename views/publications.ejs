@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/publications.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <title>BRaNT</title>
+    <link rel="icon" href="https://www.arditi.pt/images/Logos/BRaNT.png">
+</head>
+
+<%- include ("partials/header") %>
+
+    <img src="https://wallpaper.dog/large/20542088.jpg" class="img-fluid image_cover">
+    <div class="container marketing mt-5">
+        <label class="text_color_claret">Publications</label>
+        <br>
+        <% if(auth){ %>
+            <button type="button" class="btn btn-success" onclick="window.location.href='add_publication'"><i
+                    class="bi bi-journal-bookmark-fill"></i>&ensp;Add publication
+            </button>
+            <% } %>
+                <input type="text" class="form-control mb-5 w-50" id="input_search" placeholder="Search here">
+                <% publication.forEach(function(publications) { %>
+                    <div class="publication_card">
+                        <a href="/publications/<%=publications._id%>">
+                            <div class="card shadow">
+                                <div class="card-body">
+                                    <div class="d-flex">
+                                        <div id="pulications_type">
+                                            <%=publications.type%>
+                                        </div>
+                                        <div class="ml-auto p-1">
+                                            <div class="publications_date">
+                                                <%=publications.date%>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="publications_tittle mb-3 mt-1">
+                                        <%=publications.tittle%>
+                                    </div>
+                                    <% if(publications.authors!=""){ %>
+                                    <div class="publications_authors">
+                                        <b>Authors : </b>
+                                        <%=publications.authors%>
+                                    </div>
+                                    <%};%>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                <% }); %>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $("#input_search").on("keyup", function () {
+                var input = $(this).val().toLowerCase();
+                $(".card-body").filter(function () {
+                    $(this).parent().parent().toggle($(this).text().toLowerCase().indexOf(input) > -1)
+                });
+            });
+        });
+    </script>
+
+    <%- include ("partials/footer") %>

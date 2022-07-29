@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <title>BRaNT</title>
+    <link rel="icon" href="https://www.arditi.pt/images/Logos/BRaNT.png">
+</head>
+
+<%- include ("partials/header") %>
+
+    <img src="https://saocarlosemrede.com.br/wp-content/uploads/2020/01/placeholder-1200x500-1.png"
+        class="img-fluid image_cover">
+
+    <div class="container marketing mt-5">
+        <label class="text_color_claret">Multimedia</label>
+        <br>
+        <% if(auth){ %>
+            <button type="button" class="btn btn-success" onclick="window.location.href='/add_multimedia'"><i
+                    class="bi bi-images"></i>&ensp;Add multimedia
+            </button><br>
+            <% } %>
+            <div class="form">
+                <input type="text" class="form-control mb-5 w-50" id="input_search" placeholder="Search here">
+            </div>
+            <div class="row">
+                <% multimedia.forEach(function(multimedia) { %>
+                    <div class="col-sm-4 py-2 mb-3">
+                        <div class="card h-100 shadow">
+                            <% if(multimedia.link==""){ %>
+                                <img src="/images/placeholder.png">
+                            <% }else{ %>
+                                <div class="embed-responsive embed-responsive-16by9">
+                                    <iframe src="<%=multimedia.url%>" allowfullscreen></iframe>
+                                </div>
+                            <% } %>
+                            <div class="card-body">
+                                <h5 class="card-title"><b><%=multimedia.tittle%></b></h5>
+                                <p class="card-description"><%=multimedia.description%></p>
+                            </div>
+                            <% if(auth){ %>
+                                <div class="text-right mb-1 mr-1">
+                                    <button type="button" class="btn btn-primary" onclick="window.location.href='/edit_multimedia/<%=multimedia._id%>'"><i class="bi bi-pen"></i>&ensp;Edit</button>
+                                    <button type="button" class="btn btn-danger" onclick='openmodal("/multimedia/<%=multimedia._id%>?_method=DELETE","<%=multimedia.tittle%>")'><i class="bi bi-trash"></i>&ensp;Delete</button>
+                                </div>
+                            <% } %>
+                        </div>
+                    </div>
+                <% }); %>
+            </div>  
+    </div>
+    <% if(auth){ %>
+        <div class="modal fade" id="confirm_delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Delete Multimedia</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body modal-delete-message">
+                        <b class="text-danger">Delete</b>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <form action="" method="post">
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <% } %>
+    <script>
+        $(document).ready(function () {
+            $("#input_search").on("keyup", function () {
+                var input = $(this).val().toLowerCase();
+                $(".card-body").filter(function () {
+                    $(this).parent().parent().parent().toggle($(this).text().toLowerCase().indexOf(input) > -1)
+                });
+            });
+        });
+
+        function openmodal(link,title){
+            $('.modal-delete-message b').get(0).nextSibling.remove()
+            $('.modal-delete-message').append(' "'+title+'" multimedia ?');
+            $('form').attr('action',link);
+            $('#confirm_delete').modal('show');
+        }
+    </script>
+
+
+    <%- include ("partials/footer") %>

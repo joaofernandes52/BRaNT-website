@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/publications.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <title>BRaNT</title>
+    <link rel="icon" href="https://www.arditi.pt/images/Logos/BRaNT.png">
+</head>
+
+<%- include ("partials/header") %>
+
+    <img src="https://wallpaper.dog/large/20542088.jpg" class="img-fluid image_cover">
+    <div class="container marketing mt-5">
+        <a href="/publications"><i class="bi bi-caret-left-fill" id="return_icon"></i></a>
+        <br><br>
+        <% if(auth){ %>
+            <div class="text-right">
+                <button type="button" class="btn btn-primary" onclick="window.location.href='/edit_publication/<%=publication._id%>'"><i class="bi bi-pen"></i>&ensp;Edit</button>
+                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirm_delete"><i
+                        class="bi bi-trash"></i>&ensp;Delete</button>
+            </div><br>
+            <% } %>
+                <div class="d-flex">
+                    <p class="publications_info_date_type text-left">
+                        <%=publication.type%>
+                    </p>
+                    <div class="ml-auto p-1">
+                        <p class="publications_info_date_type text-right">
+                            <%=publication.date%>
+                        </p>
+                    </div>
+                </div>
+                <p class="publication_tittle mt-4">
+                    <%=publication.tittle%>
+                </p>
+                <p class="text-center">
+                    <%=publication.authors%>
+                </p>
+                <div class="publication_abstract">
+                    <p>
+                        <%=publication.abstract%>
+                    </p>
+                </div>
+                <% if(publication.url!=""){ %>
+                    <a href="<%=publication.url%>" target="_blank" id="url"><i class="bi bi-link-45deg"></i><%=publication.url%></a>
+                <% } %>
+    </div>
+    <br>
+    <% if(auth){ %>
+        <div class="modal fade" id="confirm_delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Delete Publication</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body modal-delete-message">
+                        <b class="text-danger">Delete</b> "<%=publication.tittle%>" publication ?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <form action="/publications/<%=publication._id%>?_method=DELETE" method="post">
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <% } %>
+
+    <%- include ("partials/footer") %>

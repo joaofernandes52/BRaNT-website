@@ -1,0 +1,56 @@
+<body>
+
+  <header class="header">
+
+    <nav class="navbar navbar-expand-lg header-nav fixed-top">
+      <div class="container marketing">
+        <a href="/brant">
+          <img id="menu_logo" src="/images/brant_logo.png" />
+        </a>
+        <a class="navbar-brand menu_topics" href="/brant">BRaNT</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+        <div class="menu collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link menu_topics" href="/team">Team<span class="sr-only"></span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link menu_topics" href="/publications">Publications<span class="sr-only"></span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link menu_topics" href="/activities">Activities<span class="sr-only"></span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link menu_topics" href="/multimedia">Multimedia<span class="sr-only"></span></a>
+            </li>
+          </ul>
+          <ul class="navbar-nav ml-auto">
+            <% if(auth){ %>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle menu_topics" href="#" id="navbar_admin_name" role="button"
+                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <%=user.name%>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item menu_topics" href="#"><i class="bi bi-gear-fill"></i>&emsp;Settings</a>
+                  <form action="/logout" method="post" id="logout">
+                    <a class="dropdown-item menu_topics" href="#" onclick="document.getElementById('logout').submit();"><i
+                        class="bi bi-box-arrow-left"></i>&emsp;Logout</a>
+                  </form>
+                </div>
+              </li>
+              <% } else{ %>
+                <button class="btn" onclick="location.href='/login'">Login</button>
+                <% }%>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+  </header>

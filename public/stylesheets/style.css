@@ -1,0 +1,308 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Arima:wght@700&display=swap');
+
+html,
+body {
+    font-family: "Poppins";
+    font-size: 15px;
+    line-height: 1.5;
+    box-sizing: border-box;
+    margin: 0;
+    overflow-x: hidden;
+    top: 0;
+    left: 0;
+    background-color: #f5f5f5;
+}
+
+.menu_topics {
+    text-decoration: none;
+    color: rgba(34, 54, 69, .7);
+    font-weight: 500;
+}
+
+.menu_topics:hover {
+    color: #762933;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.navbar {
+    background: rgb(255, 255, 255);
+    padding: 3rem rem;
+    height: 0rem;
+    min-height: 12vh;
+}
+
+.navbar .navbar-brand .menu_topics {
+    padding: 1rem 0;
+    display: block;
+    text-decoration: none;
+}
+
+.navbar-brand {
+    font-family: 'Arima', cursive;
+    font-size: 2.5rem;
+    color: #762933;
+
+}
+
+.navbar-toggler {
+    background-color: #762933;
+    border: none;
+    padding: 10px 6px;
+    outline: none;
+}
+
+.navbar-toggler span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    border: 1px;
+    background: white;
+}
+
+.navbar-toggler span+span {
+    margin-top: 4px;
+    width: 10px;
+    margin-left: 4px;
+}
+
+.navbar-toggler span+span+span {
+    width: 10px;
+    margin-left: 10px;
+}
+
+.navbar-expand-lg .navbar-nav .nav-link {
+    padding: 0.5rem 1.2rem;
+    font-size: 1.4rem;
+    position: relative;
+}
+
+.navbar-expand-lg .navbar-nav .nav-link:hover {
+    font-weight: bold;
+}
+
+.navbar-nav button {
+    padding: 1.2rem 0;
+}
+
+.navbar-nav .btn {
+    background-color: #762933;
+    color: white;
+    border-radius: 100px;
+    padding: 1rem 1.5rem;
+    font-size: 1.2rem;
+}
+
+.navbar-nav .btn:hover {
+    background-color: #a5505b;
+}
+
+.dropdown-menu :hover {
+    font-weight: bold;
+    background-color: white !important;
+}
+
+.dropdown-menu {
+    font-size: 1.1rem;
+}
+
+#menu_logo {
+    width: 3.5rem;
+    margin-top: -0.5%;
+    margin-left: -15%;
+}
+
+.menu {
+    background-color: white !important;
+}
+
+.image_cover {
+    width: 100%;
+    height: 12rem;
+    margin-top: 4.5rem;
+    object-fit: cover;
+}
+
+@media screen and (max-width: 700px) {
+    .image_cover {
+        height: 8rem;
+    }
+}
+
+.team_button {
+    background-color: #762933;
+}
+
+.team_button:hover {
+    background-color: #a5505b;
+}
+
+#input_search {
+    background-color: rgb(255, 255, 255);
+}
+
+.text_color_claret {
+    color: #762933;
+    font-weight: bold;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+}
+
+.btn-success {
+    background-color: #006400;
+    margin-bottom: 1.5rem;
+    margin-top: -1rem;
+}
+
+#return_icon {
+    color: #762933;
+    font-size: 45px;
+}
+
+#return_icon:hover {
+    color: #a5505b;
+}
+
+#navbar_admin_name{
+    color: #762933;
+    font-weight: bold;
+}
+
+/*--------------------------------CAROUSEL------------------------------*/
+.tittle_carousel {
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 22px;
+}
+
+.post-slider {
+    padding-bottom: 60px;
+    padding-top: 10px;
+    background-color: #762933;
+}
+
+.post-slider .carousel-control-next,
+.carousel-control-prev {
+    width: auto;
+    top: 50%;
+    bottom: initial;
+}
+
+.post-slider .carousel-control-prev {
+    left: -40px;
+}
+
+.post-slider .carousel-control-next {
+    right: -40px;
+}
+
+.post-slider .carousel-indicators {
+    bottom: -70px;
+}
+
+.post-slider img {
+    border-radius: 10px;
+    border: 3px solid #ffffff;
+}
+
+.post-slider .carousel_news_tittle {
+    font-weight: bold;
+    font-size: 1rem;
+    color: #ffffff;
+    border-bottom: 2px solid #ffffff;
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+    margin-top: 10px;
+}
+
+.post-slider ul {
+    list-style: none;
+    padding: 0;
+}
+
+.post-slider ul li {
+    padding-bottom: 10px;
+}
+
+.post-slider ul i {
+    font-size: 18px;
+    margin-right: 5px;
+    color: #ffffff;
+}
+
+.col-md-6 img {
+    display: block;
+    margin: auto;
+    width: 10rem;
+}
+
+#news_content {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    text-align: justify;
+    text-justify: inter-word;
+    font-size: 15px;
+}
+
+/*-- Responsive CSS --*/
+@media (max-width: 767px) {
+    .post-slider .carousel-control-prev {
+        left: 0px;
+    }
+
+    .post-slider .carousel-control-next {
+        right: 0px;
+    }
+
+    .post-slider .price {
+        font-size: 18px;
+        top: 12px;
+    }
+
+    #news_content {
+        display: -webkit-box;
+        overflow: hidden;
+        -webkit-line-clamp: 5;
+        -webkit-box-orient: vertical;
+    }
+
+    .col-md-6 img {
+        width: 7rem;
+    }
+}
+
+/*----------------------------------------------------------------------*/
+
+#image_input{
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+}
+
+.modal-delete-message{
+    text-align: justify;
+}
+
+.card-description{
+    font-size: 13.5px;
+    text-align: justify;
+}
+
+.about_tittle{
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.about_content{
+    font-size: 15px;
+    text-align: justify;
+    white-space: pre-wrap;
+}
+
+.social_icons a:hover{
+    text-decoration: none;
+}
