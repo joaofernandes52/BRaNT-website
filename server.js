@@ -97,33 +97,7 @@ server.listen(8080, function () {
   console.log('listening on :8080');
 });
 
-const team_members = model.team_members;
 const User = model.user;
-
-
-app.post('/add_team_member', upload.single('image'), (req, res, next) => {
-  var obj = {
-    name: req.body.name,
-    email: req.body.email,
-    phone: req.body.phone,
-    country: req.body.country,
-    area: req.body.area,
-    about: req.body.about,
-    img: {
-      data: fs.readFileSync(path.join(__dirname + '/uploads/' + req.file.filename)),
-      contentType: 'image/png'
-    }
-  }
-  team_members.create(obj, function (err, item) {
-    if (err) {
-      console.log(err);
-    }
-    else {
-      // item.save();
-      res.redirect('/team');
-    }
-  });
-});
 
 
 passport.use(new LocalStrategy(async function (username, password, done) {

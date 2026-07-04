@@ -278,4 +278,23 @@ module.exports = function (app, ensureLoggedIn, verifyCsrf, upload, fs, path, pu
         });
     });
 
+    app.post('/add_team_member', ensureLoggedIn('/login'), upload.single('image'), async (req, res, next) => {
+        try {
+            const obj = {
+                name: req.body.name,
+                email: req.body.email,
+                phone: req.body.phone,
+                country: req.body.country,
+                area: req.body.area,
+                about: req.body.about,
+                img: {
+                    data: fs.readFileSync(path.join(__dirname + '/../uploads/' + req.file.filename)),
+                    contentType: req.file.mimetype
+                }
+            };
+            await team_members.create(obj);
+            res.redirect('/team');
+        } catch (err) { next(err); }
+    });
+
 }
