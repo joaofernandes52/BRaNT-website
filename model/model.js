@@ -1,11 +1,11 @@
-var mongoose = require("mongoose");
+const mongoose = require("mongoose");
 const bcrypt = require('bcrypt');
 const SALT_ROUNDS = 10;
 
 mongoose.connect(process.env.MONGODB_URI);
 const  ObjectId = require('mongodb').ObjectId;
 
-var user_Schema = new mongoose.Schema({
+const user_Schema = new mongoose.Schema({
     username: String,
     password: String,
     name: String,
@@ -13,7 +13,7 @@ var user_Schema = new mongoose.Schema({
     versionKey: false
 });
 
-var team_members_Schema = new mongoose.Schema({
+const team_members_Schema = new mongoose.Schema({
     name: String,
     area: String,
     email: String,
@@ -30,7 +30,7 @@ var team_members_Schema = new mongoose.Schema({
 }
 );
 
-var publications_Schema = new mongoose.Schema({
+const publications_Schema = new mongoose.Schema({
     title: String,
     authors: String,
     type: String,
@@ -41,7 +41,7 @@ var publications_Schema = new mongoose.Schema({
     versionKey: false
 });
 
-var activities_Schema = new mongoose.Schema({
+const activities_Schema = new mongoose.Schema({
     title: String,
     participations: String,
     abstract: String,
@@ -51,7 +51,7 @@ var activities_Schema = new mongoose.Schema({
     versionKey: false
 });
 
-var multimedia_Schema = new mongoose.Schema({
+const multimedia_Schema = new mongoose.Schema({
     title: String,
     description: String,
     url: String,
@@ -59,7 +59,7 @@ var multimedia_Schema = new mongoose.Schema({
     versionKey: false
 });
 
-var about_us_Schema = new mongoose.Schema({
+const about_us_Schema = new mongoose.Schema({
     objectives: String,
     mission: String,
     structural_org: String,
@@ -83,12 +83,12 @@ user_Schema.statics.hashPassword = async function (plaintext) {
     return bcrypt.hash(plaintext, SALT_ROUNDS);
 };
 
-var user = mongoose.model('users', user_Schema);
-var team_members = mongoose.model('team_members', team_members_Schema);
-var publications = mongoose.model('publications', publications_Schema);
-var multimedia = mongoose.model('multimedia', multimedia_Schema);
-var about_us = mongoose.model('about_us', about_us_Schema);
-var activities = mongoose.model('activities', activities_Schema);
+const user = mongoose.model('users', user_Schema);
+const team_members = mongoose.model('team_members', team_members_Schema);
+const publications = mongoose.model('publications', publications_Schema);
+const multimedia = mongoose.model('multimedia', multimedia_Schema);
+const about_us = mongoose.model('about_us', about_us_Schema);
+const activities = mongoose.model('activities', activities_Schema);
 
 module.exports = { user, team_members, publications, multimedia, about_us, ObjectId, activities};
 

@@ -115,11 +115,6 @@ passport.use(new LocalStrategy(async function (username, password, done) {
 
 app.get('/login', (req, res) => {
   const isAuthenticated = !!req.user;
-  if (isAuthenticated) {
-    console.log(`user is authenticated, session is ${req.session.id}`);
-  } else {
-    console.log("unknown user");
-  }
   res.render(isAuthenticated ? "index" : "login");
 });
 
@@ -139,12 +134,10 @@ app.post("/logout", (req, res) => {
 });
 
 passport.serializeUser((user, cb) => {
-  console.log(`serializeUser ${user.id}`);
   cb(null, user.id);
 });
 
 passport.deserializeUser((id, cb) => {
-  console.log(`deserializeUser ${id}`);
   User.findById(id, function (err, user) {
     if (err) { return cb(err); }
     cb(null, user);
@@ -160,8 +153,8 @@ app.use((err, req, res, next) => {
 });
 
 app.all('*', function (req, res) {
-  var isAuthenticated = !!req.user;
-		var user = req.user;
+  const isAuthenticated = !!req.user;
+		const user = req.user;
 		about_us.find({}, function (err, about) {
 			if (err) {
 				console.log(err);
