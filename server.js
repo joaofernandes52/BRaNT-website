@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const express = require("express");
 const app = express();
 const server = require("http").createServer(app);
@@ -27,7 +29,7 @@ const upload = multer({ storage: storage });
 const LocalStrategy = require("passport-local").Strategy;
 const ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn;
 const ensureLoggedOut = require('connect-ensure-login').ensureLoggedOut;
-const sessionMiddleware = session({ secret: "changeit", resave: false, saveUninitialized: false });
+const sessionMiddleware = session({ secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: false });
 const expressSanitizer = require('express-sanitizer');
 //-------------------------------------------------------APP CONFIG ------------------------------------------------------------------------
 app.use(methodOverride("_method")); //Permite utilizar o HTTP PUT e DELETE num formulario do lado do cliente
