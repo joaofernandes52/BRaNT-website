@@ -1,7 +1,6 @@
 var mongoose = require("mongoose");
 
-//mongoose.connect("mongodb+srv://DBW11:Kq7sKuMNdj1wibo5@clusterdbw.1dbjr.mongodb.net/DBW11?authSource=admin&replicaSet=atlas-bek8xj-shard-0&w=majority&readPreference=primary&retryWrites=true&ssl=true");
-mongoose.connect("mongodb+srv://Brant:Brant@dbbrant.mlorq9v.mongodb.net/?retryWrites=true&w=majority");
+mongoose.connect(process.env.MONGODB_URI);
 const  ObjectId = require('mongodb').ObjectId;
 
 var user_Schema = new mongoose.Schema({
