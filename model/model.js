@@ -31,7 +31,7 @@ var team_members_Schema = new mongoose.Schema({
 );
 
 var publications_Schema = new mongoose.Schema({
-    tittle: String,
+    title: String,
     authors: String,
     type: String,
     date: String,
@@ -42,7 +42,7 @@ var publications_Schema = new mongoose.Schema({
 });
 
 var activities_Schema = new mongoose.Schema({
-    tittle: String,
+    title: String,
     participations: String,
     abstract: String,
     date: String,
@@ -52,7 +52,7 @@ var activities_Schema = new mongoose.Schema({
 });
 
 var multimedia_Schema = new mongoose.Schema({
-    tittle: String,
+    title: String,
     description: String,
     url: String,
 }, {
@@ -64,7 +64,7 @@ var about_us_Schema = new mongoose.Schema({
     mission: String,
     structural_org: String,
     about: String,
-    adress: String,
+    address: String,
     email: String,
     phone1: String,
     phone2: String,

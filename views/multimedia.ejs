@@ -42,13 +42,13 @@
                                 </div>
                             <% } %>
                             <div class="card-body">
-                                <h5 class="card-title"><b><%=multimedia.tittle%></b></h5>
+                                <h5 class="card-title"><b><%=multimedia.title%></b></h5>
                                 <p class="card-description"><%=multimedia.description%></p>
                             </div>
                             <% if(auth){ %>
                                 <div class="text-right mb-1 mr-1">
                                     <button type="button" class="btn btn-primary" onclick="window.location.href='/edit_multimedia/<%=multimedia._id%>'"><i class="bi bi-pen"></i>&ensp;Edit</button>
-                                    <button type="button" class="btn btn-danger" onclick='openmodal("/multimedia/<%=multimedia._id%>?_method=DELETE","<%=multimedia.tittle%>")'><i class="bi bi-trash"></i>&ensp;Delete</button>
+                                    <button type="button" class="btn btn-danger" onclick='openmodal("/multimedia/<%=multimedia._id%>?_method=DELETE","<%=multimedia.title%>")'><i class="bi bi-trash"></i>&ensp;Delete</button>
                                 </div>
                             <% } %>
                         </div>
