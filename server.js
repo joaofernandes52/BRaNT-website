@@ -152,20 +152,8 @@ app.use((err, req, res, next) => {
   next(err);
 });
 
-app.all('*', function (req, res) {
-  const isAuthenticated = !!req.user;
-		const user = req.user;
-		about_us.find({}, function (err, about) {
-			if (err) {
-				console.log(err);
-			} else {
-				if (isAuthenticated) {
-					res.render("404", { auth: isAuthenticated, user: user, about_us: about });
-				}
-				else {
-					isAuthenticated = false;
-					res.render("404", { auth: isAuthenticated, user: user, about_us: about });
-				}
-			}
-		});
+app.all('*', async (req, res, next) => {
+  try {
+    res.render("404");
+  } catch (err) { next(err); }
 });
