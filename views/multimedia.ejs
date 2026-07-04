@@ -16,8 +16,7 @@
 
 <%- include ("partials/header") %>
 
-    <img src="https://saocarlosemrede.com.br/wp-content/uploads/2020/01/placeholder-1200x500-1.png"
-        class="img-fluid image_cover">
+    <img src="/images/cover_multimedia.jpg" class="img-fluid image_cover" alt="BRaNT">
 
     <div class="container marketing mt-5">
         <label class="text_color_claret">Multimedia</label>
@@ -35,7 +34,7 @@
                     <div class="col-sm-4 py-2 mb-3">
                         <div class="card h-100 shadow">
                             <% if(multimedia.link==""){ %>
-                                <img src="/images/placeholder.png">
+                                <img src="/images/thumbnail_video.jpg" class="card-img-top" alt="video">
                             <% }else{ %>
                                 <div class="embed-responsive embed-responsive-16by9">
                                     <iframe src="<%=multimedia.url%>" allowfullscreen></iframe>
