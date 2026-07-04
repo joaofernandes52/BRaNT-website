@@ -40,6 +40,7 @@
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                   <a class="dropdown-item menu_topics" href="#"><i class="bi bi-gear-fill"></i>&emsp;Settings</a>
                   <form action="/logout" method="post" id="logout">
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                     <a class="dropdown-item menu_topics" href="#" onclick="document.getElementById('logout').submit();"><i
                         class="bi bi-box-arrow-left"></i>&emsp;Logout</a>
                   </form>

@@ -22,6 +22,7 @@
         <br><br>
         <label class="text_color_claret">Add Activitie</label>
         <form action="/add_activitie" method="post">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
             <label for="exampleFormControlSelect1">Title</label>
             <input type="text" class="form-control mb-3" id="title" name="title" value="" placeholder="Enter title">
             <label for="exampleFormControlSelect1">Participations</label>

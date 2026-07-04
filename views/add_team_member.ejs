@@ -23,6 +23,7 @@
         <br><br>
         <label class="text_color_claret">Add Member</label>
         <form action="/add_team_member" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
             <div class="row mb-2">
                 <div class="col">
                     <label for="inputName">Name</label>

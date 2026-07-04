@@ -22,6 +22,7 @@
         <br><br>
         <label class="text_color_claret">Edit Publication</label>
         <form action="/edit_publication/<%=publication._id%>?_method=PUT" method="post">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
             <label for="exampleFormControlSelect1">Title</label>
             <input type="text" class="form-control mb-4" id="title" name="title" value="<%=publication.title%>"
                 placeholder="Enter title">

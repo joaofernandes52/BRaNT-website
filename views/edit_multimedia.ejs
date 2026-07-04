@@ -22,6 +22,7 @@
         <br><br>
         <label class="text_color_claret">Edit Multimedia</label>
         <form action="/edit_multimedia/<%=multimedia._id%>?_method=PUT" method="post">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
             <label for="exampleFormControlSelect1">Title</label>
             <input type="text" class="form-control mb-3" id="title" name="title" value="<%=multimedia.title%>" placeholder="Enter title">
             <label for="exampleFormControlSelect1">Video URL</label>

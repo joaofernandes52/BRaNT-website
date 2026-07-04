@@ -24,6 +24,7 @@
         <br><br>
         <label class="text_color_claret">Edit About us</label>
         <form action="/edit_about_us/<%=about_us._id%>?_method=PUT" method="post">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
             <div class="form-group">
                 <label for="Objectives">Objectives</label>
                 <textarea class="form-control mb-5" id="objectives" name="objectives"

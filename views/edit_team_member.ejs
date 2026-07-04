@@ -23,6 +23,7 @@
         <br><br>
         <label class="text_color_claret">Edit Member</label>
         <form action="/edit_team_member/<%=member._id%>?_method=PUT" method="post">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
             <div class="row mb-2">
                 <div class="col">
                     <label for="inputName">Name</label>
