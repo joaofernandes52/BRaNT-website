@@ -54,8 +54,44 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(expressSanitizer());
 //---------------------------------------------------------------------------------------------------------------------------
+const about_us = model.about_us;
+
+// Middleware global — injeta dados partilhados em todas as views
+app.use(async (req, res, next) => {
+  try {
+    const about = await about_us.find({});
+    res.locals.about_us = about;
+    res.locals.auth = !!req.user;
+    res.locals.user = req.user || null;
+    next();
+  } catch (err) {
+    next(err);
+  }
+});
+
+// CSRF: gera token por sessão, injeta em todas as views
+const crypto = require('crypto');
+app.use((req, res, next) => {
+  if (!req.session.csrfToken) {
+    req.session.csrfToken = crypto.randomBytes(32).toString('hex');
+  }
+  res.locals.csrfToken = req.session.csrfToken;
+  next();
+});
+
+// Middleware de verificação CSRF (usado nas rotas que alteram dados)
+function verifyCsrf(req, res, next) {
+  if (['POST', 'PUT', 'DELETE'].includes(req.method)) {
+    const token = req.body._csrf || req.query._csrf;
+    if (!token || token !== req.session.csrfToken) {
+      return res.status(403).send('Acesso negado: token CSRF inválido.');
+    }
+  }
+  next();
+}
+
 require('./REST/rest')(app, model.team_members, upload, model.publications, model.multimedia, model.about_us,model.activities);
-require('./REST/dashboard')(app, ensureLoggedIn, upload, fs, path, model.publications, model.team_members, model.multimedia, model.about_us, model.ObjectId,model.activities);
+require('./REST/dashboard')(app, ensureLoggedIn, verifyCsrf, upload, fs, path, model.publications, model.team_members, model.multimedia, model.about_us, model.ObjectId,model.activities);
 
 server.listen(8080, function () {
   console.log('listening on :8080');
@@ -63,7 +99,6 @@ server.listen(8080, function () {
 
 const team_members = model.team_members;
 const User = model.user;
-const about_us = model.about_us;
 
 
 app.post('/add_team_member', upload.single('image'), (req, res, next) => {

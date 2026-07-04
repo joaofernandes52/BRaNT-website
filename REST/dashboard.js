@@ -1,4 +1,4 @@
-module.exports = function (app, ensureLoggedIn, upload, fs, path, publications, team_members, multimedia, about_us, ObjectId, activities) {
+module.exports = function (app, ensureLoggedIn, verifyCsrf, upload, fs, path, publications, team_members, multimedia, about_us, ObjectId, activities) {
     app.get("/add_team_member", ensureLoggedIn('/login'), (req, res) => {
         about_us.find({}, function (err, about) {
             if (err) {
