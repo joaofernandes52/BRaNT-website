@@ -1,34 +1,15 @@
 module.exports = function (app, ensureLoggedIn, verifyCsrf, upload, fs, path, publications, team_members, multimedia, about_us, ObjectId, activities) {
-    app.get("/add_team_member", ensureLoggedIn('/login'), (req, res) => {
-        about_us.find({}, function (err, about) {
-            if (err) {
-                console.log(err);
-            } else {
-                var isAuthenticated = !!req.user;
-                var user = req.user;
-                res.render("add_team_member", { auth: isAuthenticated, user: user, about_us: about });
-            }
-        });
+    app.get("/add_team_member", ensureLoggedIn('/login'), async (req, res, next) => {
+        try {
+            res.render("add_team_member");
+        } catch (err) { next(err); }
     });
 
-    app.get("/edit_team_member/:id", ensureLoggedIn('/login'), (req, res) => {
-        about_us.find({}, function (err, about) {
-            if (err) {
-                console.error(err);
-            } else {
-                team_members.findById(req.params.id, function (err, member) {
-                    if (err) {
-                        console.log(err);
-                        res.redirect('/team');
-                    } else {
-                        var isAuthenticated = !!req.user;
-                        var user = req.user;
-                        res.render("edit_team_member", { auth: isAuthenticated, user: user, member: member, about_us: about });
-                    }
-                });
-            }
-        });
-
+    app.get("/edit_team_member/:id", ensureLoggedIn('/login'), async (req, res, next) => {
+        try {
+            const member = await team_members.findById(req.params.id);
+            res.render("edit_team_member", { member });
+        } catch (err) { next(err); }
     });
 
     app.delete("/team/:id", ensureLoggedIn('/login'), verifyCsrf, async (req, res, next) => {
@@ -47,17 +28,10 @@ module.exports = function (app, ensureLoggedIn, verifyCsrf, upload, fs, path, pu
         } catch (err) { next(err); }
     });
 
-    app.get("/add_publication", ensureLoggedIn('/login'), (req, res) => {
-        about_us.find({}, function (err, about) {
-            if (err) {
-                console.error(err);
-            } else {
-                var isAuthenticated = !!req.user;
-                var user = req.user;
-                res.render("add_publication", { auth: isAuthenticated, user: user, about_us: about });
-            }
-        });
-
+    app.get("/add_publication", ensureLoggedIn('/login'), async (req, res, next) => {
+        try {
+            res.render("add_publication");
+        } catch (err) { next(err); }
     });
 
     app.post("/add_publication", ensureLoggedIn('/login'), verifyCsrf, async (req, res, next) => {
@@ -74,23 +48,11 @@ module.exports = function (app, ensureLoggedIn, verifyCsrf, upload, fs, path, pu
         } catch (err) { next(err); }
     });
 
-    app.get("/edit_publication/:id", ensureLoggedIn('/login'), (req, res) => {
-        about_us.find({}, function (err, about) {
-            if (err) {
-                console.error(err);
-            } else {
-                publications.findById(req.params.id, function (err, publication) {
-                    if (err) {
-                        console.log(err);
-                        res.redirect('/publications');
-                    } else {
-                        var isAuthenticated = !!req.user;
-                        var user = req.user;
-                        res.render("edit_publication", { auth: isAuthenticated, user: user, publication: publication, about_us: about });
-                    }
-                });
-            }
-        });
+    app.get("/edit_publication/:id", ensureLoggedIn('/login'), async (req, res, next) => {
+        try {
+            const publication = await publications.findById(req.params.id);
+            res.render("edit_publication", { publication });
+        } catch (err) { next(err); }
     });
 
     app.put("/edit_publication/:id", ensureLoggedIn('/login'), verifyCsrf, async (req, res, next) => {
@@ -102,17 +64,10 @@ module.exports = function (app, ensureLoggedIn, verifyCsrf, upload, fs, path, pu
         } catch (err) { next(err); }
     });
 
-    app.get("/add_activitie", ensureLoggedIn('/login'), (req, res) => {
-        about_us.find({}, function (err, about) {
-            if (err) {
-                console.error(err);
-            } else {
-                var isAuthenticated = !!req.user;
-                var user = req.user;
-                res.render("add_activitie", { auth: isAuthenticated, user: user, about_us: about });
-            }
-        });
-
+    app.get("/add_activitie", ensureLoggedIn('/login'), async (req, res, next) => {
+        try {
+            res.render("add_activitie");
+        } catch (err) { next(err); }
     });
 
     app.post("/add_activitie", ensureLoggedIn('/login'), verifyCsrf, async (req, res, next) => {
@@ -129,23 +84,11 @@ module.exports = function (app, ensureLoggedIn, verifyCsrf, upload, fs, path, pu
         } catch (err) { next(err); }
     });
 
-    app.get("/edit_activitie/:id", ensureLoggedIn('/login'), (req, res) => {
-        about_us.find({}, function (err, about) {
-            if (err) {
-                console.error(err);
-            } else {
-                activities.findById(req.params.id, function (err, activitie) {
-                    if (err) {
-                        console.log(err);
-                        res.redirect('/activities');
-                    } else {
-                        var isAuthenticated = !!req.user;
-                        var user = req.user;
-                        res.render("edit_activitie", { auth: isAuthenticated, user: user, activitie: activitie, about_us: about });
-                    }
-                });
-            }
-        });
+    app.get("/edit_activitie/:id", ensureLoggedIn('/login'), async (req, res, next) => {
+        try {
+            const activitie = await activities.findById(req.params.id);
+            res.render("edit_activitie", { activitie });
+        } catch (err) { next(err); }
     });
 
     app.put("/edit_activitie/:id", ensureLoggedIn('/login'), verifyCsrf, async (req, res, next) => {
@@ -157,17 +100,10 @@ module.exports = function (app, ensureLoggedIn, verifyCsrf, upload, fs, path, pu
         } catch (err) { next(err); }
     });
 
-    app.get("/add_multimedia", ensureLoggedIn('/login'), (req, res) => {
-        about_us.find({}, function (err, about) {
-            if (err) {
-                console.error(err);
-            } else {
-                var isAuthenticated = !!req.user;
-                var user = req.user;
-                res.render("add_multimedia", { auth: isAuthenticated, user: user, about_us: about });
-            }
-        });
-
+    app.get("/add_multimedia", ensureLoggedIn('/login'), async (req, res, next) => {
+        try {
+            res.render("add_multimedia");
+        } catch (err) { next(err); }
     });
 
     app.post("/add_multimedia", ensureLoggedIn('/login'), verifyCsrf, async (req, res, next) => {
@@ -184,24 +120,11 @@ module.exports = function (app, ensureLoggedIn, verifyCsrf, upload, fs, path, pu
         } catch (err) { next(err); }
     });
 
-    app.get('/edit_multimedia/:id', ensureLoggedIn('/login'), (req, res) => {
-        about_us.find({}, function (err, about) {
-            if (err) {
-                console.error(err);
-            } else {
-                multimedia.findById(req.params.id, function (err, multimedia) {
-                    if (err) {
-                        console.log(err);
-                        res.redirect('/multimedia');
-                    }
-                    else {
-                        var isAuthenticated = !!req.user;
-                        var user = req.user;
-                        res.render("edit_multimedia", { auth: isAuthenticated, user: user, multimedia: multimedia, about_us: about });
-                    }
-                });
-            }
-        });
+    app.get('/edit_multimedia/:id', ensureLoggedIn('/login'), async (req, res, next) => {
+        try {
+            const media = await multimedia.findById(req.params.id);
+            res.render("edit_multimedia", { multimedia: media });
+        } catch (err) { next(err); }
     });
 
     app.put("/edit_multimedia/:id", ensureLoggedIn('/login'), verifyCsrf, async (req, res, next) => {
@@ -213,19 +136,11 @@ module.exports = function (app, ensureLoggedIn, verifyCsrf, upload, fs, path, pu
         } catch (err) { next(err); }
     });
 
-    app.get('/edit_about_us/:id', ensureLoggedIn('/login'), (req, res) => {
-        about_us.find(ObjectId(req.params.id), function (err, about) {
-            if (err) {
-                console.log(err);
-                res.redirect('/brant');
-            }
-            else {
-                var isAuthenticated = !!req.user;
-                var user = req.user;
-                res.render("edit_about_us", { auth: isAuthenticated, user: user, about_us: about });
-                console.log(about);
-            }
-        });
+    app.get('/edit_about_us/:id', ensureLoggedIn('/login'), async (req, res, next) => {
+        try {
+            const about = await about_us.findById(req.params.id);
+            res.render("edit_about_us", { about_us: [about] });
+        } catch (err) { next(err); }
     });
 
     app.put("/edit_about_us/:id", ensureLoggedIn('/login'), verifyCsrf, async (req, res, next) => {
