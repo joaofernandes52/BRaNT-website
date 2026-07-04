@@ -128,7 +128,7 @@ app.post(
 );
 
 
-app.post("/logout", (req, res) => {
+app.post("/logout", verifyCsrf, (req, res) => {
   req.logout();
   res.redirect("/brant");
 });

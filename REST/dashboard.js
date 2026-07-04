@@ -154,6 +154,9 @@ module.exports = function (app, ensureLoggedIn, verifyCsrf, upload, fs, path, pu
 
     app.post('/add_team_member', ensureLoggedIn('/login'), upload.single('image'), async (req, res, next) => {
         try {
+            if (!req.file) {
+                return res.status(400).send('Image required.');
+            }
             const obj = {
                 name: req.body.name,
                 email: req.body.email,
