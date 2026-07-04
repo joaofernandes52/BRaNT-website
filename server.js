@@ -24,7 +24,19 @@ const storage = multer.diskStorage({
   }
 });
 
-const upload = multer({ storage: storage });
+const ALLOWED_MIME_TYPES = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+
+const upload = multer({
+  storage: storage,
+  limits: { fileSize: 3 * 1024 * 1024 }, // 3 MB
+  fileFilter: (req, file, cb) => {
+    if (ALLOWED_MIME_TYPES.includes(file.mimetype)) {
+      cb(null, true);
+    } else {
+      cb(new Error('Tipo de ficheiro não permitido. Usa JPG, PNG, GIF ou WebP.'));
+    }
+  }
+});
 
 const LocalStrategy = require("passport-local").Strategy;
 const ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn;
@@ -137,6 +149,13 @@ passport.deserializeUser((id, cb) => {
   });
 });
 
+
+app.use((err, req, res, next) => {
+  if (err.message === 'Tipo de ficheiro não permitido. Usa JPG, PNG, GIF ou WebP.') {
+    return res.status(400).send(err.message);
+  }
+  next(err);
+});
 
 app.all('*', function (req, res) {
   var isAuthenticated = !!req.user;
