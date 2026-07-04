@@ -1,4 +1,6 @@
 var mongoose = require("mongoose");
+const bcrypt = require('bcrypt');
+const SALT_ROUNDS = 10;
 
 mongoose.connect(process.env.MONGODB_URI);
 const  ObjectId = require('mongodb').ObjectId;
@@ -73,9 +75,13 @@ var about_us_Schema = new mongoose.Schema({
     versionKey: false
 });
 
-user_Schema.methods.verifyPassword = function (password) {
-    return password === this.password;
-}
+user_Schema.methods.verifyPassword = async function (password) {
+    return bcrypt.compare(password, this.password);
+};
+
+user_Schema.statics.hashPassword = async function (plaintext) {
+    return bcrypt.hash(plaintext, SALT_ROUNDS);
+};
 
 var user = mongoose.model('users', user_Schema);
 var team_members = mongoose.model('team_members', team_members_Schema);

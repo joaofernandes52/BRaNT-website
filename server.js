@@ -79,16 +79,17 @@ app.post('/add_team_member', upload.single('image'), (req, res, next) => {
 });
 
 
-passport.use(new LocalStrategy(
-  function (username, password, done) {
-    User.findOne({ username: username }, function (err, user) {
-      if (err) { return done(err); }
-      if (!user) { return done(null, false); }
-      if (!user.verifyPassword(password)) { return done(null, false); }
-      return done(null, user);
-    });
+passport.use(new LocalStrategy(async function (username, password, done) {
+  try {
+    const user = await User.findOne({ username });
+    if (!user) return done(null, false);
+    const ok = await user.verifyPassword(password);
+    if (!ok) return done(null, false);
+    return done(null, user);
+  } catch (err) {
+    return done(err);
   }
-));
+}));
 
 
 app.get('/login', (req, res) => {
