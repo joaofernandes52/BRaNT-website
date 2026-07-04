@@ -16,8 +16,7 @@
 
 <%- include ("partials/header") %>
 
-    <img src="https://saocarlosemrede.com.br/wp-content/uploads/2020/01/placeholder-1200x500-1.png"
-        class="img-fluid image_cover">
+    <img src="/images/placeholder.png" class="img-fluid image_cover" alt="BRaNT">
     <div class="container marketing mt-5">
         <label class="text_color_claret">Team</label>
         <br>
@@ -32,8 +31,10 @@
                 <div class="row" id="member">
                     <% members.forEach(function(member) { %>
                         <div class="mb-5 col-lg-4">
-                            <img class="rounded-circle mb-3" width="140" height="140" src="data:image/<%=member.img.contentType%>;base64,
-                        <%=member.img.data.toString('base64')%>" data-holder-rendered="true">
+                            <img class="rounded-circle mb-3" width="140" height="140"
+                                 src="data:image/<%=member.img.contentType%>;base64,<%=member.img.data.toString('base64')%>"
+                                 alt="Foto de <%= member.name %>"
+                                 data-holder-rendered="true">
                             <h4>
                                 <%= member.name %>
                             </h4>

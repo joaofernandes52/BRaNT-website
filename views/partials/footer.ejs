@@ -1,11 +1,6 @@
-<!-- Go to www.addthis.com/dashboard to customize your tools -->
-<!--
-<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-62c490355c9fa83d"></script>
--->
-
 </body>
 
-<% about_us.forEach(function(about) { %>
+<% const about = about_us[0]; if (about) { %>
 	<footer class="text-center text-lg-start bg-dark text-white mt-5">
 		<div class="container marketing">
 			<section class="d-flex justify-content-center justify-content-lg-between p-3 border-bottom">
@@ -78,19 +73,19 @@
 						<div class="text-uppercase fw-bold mb-4">
 							<b>Contact</b>
 						</div>
-						<p><i class="fas fa-home me-3"></i>
+						<p><i class="bi bi-geo-alt-fill me-3"></i>
 							<%=about.address%>
 						</p>
 						<p>
-							<i class="fas fa-envelope me-3"></i>
+							<i class="bi bi-envelope-fill me-3"></i>
 							<a href="mailto:<%=about.email%>" class="text-white">
 								<%=about.email%>
 							</a>
 						</p>
-						<p><i class="fas fa-phone me-3"></i><a href="tel:<%=about.phone1%>" class="text-white">
+						<p><i class="bi bi-telephone-fill me-3"></i><a href="tel:<%=about.phone1%>" class="text-white">
 								<%=about.phone1%>
 							</a></p>
-						<p><i class="fas fa-print me-3"></i><a href="tel:<%=about.phone2%>" class="text-white">
+						<p><i class="bi bi-printer-fill me-3"></i><a href="tel:<%=about.phone2%>" class="text-white">
 								<%=about.phone2%>
 							</a></p>
 					</div>
@@ -103,15 +98,13 @@
 
 		<!-- Copyright -->
 		<div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.244);">
-			© 2022 Copyright
+			© <%= new Date().getFullYear() %> Copyright
 			<a class="text-reset fw-bold" href="/">BRaNT</a>
 		</div>
 		<!-- Copyright -->
 	</footer>
-	<%});%>
+	<% } %>
 
-		<script type="text/javascript"
-			src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-62c5a12ebec866bd"></script>
 		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 			integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
 			crossorigin="anonymous"></script>
