@@ -18,6 +18,7 @@ module.exports = function (app, team_members, upload, publications, multimedia, 
   app.get("/team/:id", async (req, res, next) => {
     try {
       const member_profile = await team_members.findById(req.params.id);
+      if (!member_profile) return res.status(404).render('404');
       res.render("member_profile", { member_profile });
     } catch (err) { next(err); }
   });
@@ -36,6 +37,7 @@ module.exports = function (app, team_members, upload, publications, multimedia, 
   app.get("/publications/:id", async (req, res, next) => {
     try {
       const publication = await publications.findById(req.params.id);
+      if (!publication) return res.status(404).render('404');
       res.render("publications_info", { publication });
     } catch (err) { next(err); }
   });
@@ -54,6 +56,7 @@ module.exports = function (app, team_members, upload, publications, multimedia, 
   app.get("/activities/:id", async (req, res, next) => {
     try {
       const activitie = await activities.findById(req.params.id);
+      if (!activitie) return res.status(404).render('404');
       res.render("activities_info", { activitie });
     } catch (err) { next(err); }
   });
