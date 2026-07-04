@@ -14,12 +14,12 @@ module.exports = function (app, ensureLoggedIn, upload, fs, path, publications, 
     app.get("/edit_team_member/:id", ensureLoggedIn('/login'), (req, res) => {
         about_us.find({}, function (err, about) {
             if (err) {
-                console - log(err);
+                console.error(err);
             } else {
                 team_members.findById(req.params.id, function (err, member) {
                     if (err) {
                         console.log(err);
-                        redirect('/team');
+                        res.redirect('/team');
                     } else {
                         var isAuthenticated = !!req.user;
                         var user = req.user;
@@ -57,7 +57,7 @@ module.exports = function (app, ensureLoggedIn, upload, fs, path, publications, 
     app.get("/add_publication", ensureLoggedIn('/login'), (req, res) => {
         about_us.find({}, function (err, about) {
             if (err) {
-                console - log(err);
+                console.error(err);
             } else {
                 var isAuthenticated = !!req.user;
                 var user = req.user;
@@ -92,7 +92,7 @@ module.exports = function (app, ensureLoggedIn, upload, fs, path, publications, 
     app.get("/edit_publication/:id", ensureLoggedIn('/login'), (req, res) => {
         about_us.find({}, function (err, about) {
             if (err) {
-                console - log(err);
+                console.error(err);
             } else {
                 publications.findById(req.params.id, function (err, publication) {
                     if (err) {
@@ -123,7 +123,7 @@ module.exports = function (app, ensureLoggedIn, upload, fs, path, publications, 
     app.get("/add_activitie", ensureLoggedIn('/login'), (req, res) => {
         about_us.find({}, function (err, about) {
             if (err) {
-                console - log(err);
+                console.error(err);
             } else {
                 var isAuthenticated = !!req.user;
                 var user = req.user;
@@ -158,7 +158,7 @@ module.exports = function (app, ensureLoggedIn, upload, fs, path, publications, 
     app.get("/edit_activitie/:id", ensureLoggedIn('/login'), (req, res) => {
         about_us.find({}, function (err, about) {
             if (err) {
-                console - log(err);
+                console.error(err);
             } else {
                 activities.findById(req.params.id, function (err, activitie) {
                     if (err) {
@@ -189,7 +189,7 @@ module.exports = function (app, ensureLoggedIn, upload, fs, path, publications, 
     app.get("/add_multimedia", ensureLoggedIn('/login'), (req, res) => {
         about_us.find({}, function (err, about) {
             if (err) {
-                console - log(err);
+                console.error(err);
             } else {
                 var isAuthenticated = !!req.user;
                 var user = req.user;
@@ -224,7 +224,7 @@ module.exports = function (app, ensureLoggedIn, upload, fs, path, publications, 
     app.get('/edit_multimedia/:id', ensureLoggedIn('/login'), (req, res) => {
         about_us.find({}, function (err, about) {
             if (err) {
-                console - log(err);
+                console.error(err);
             } else {
                 multimedia.findById(req.params.id, function (err, multimedia) {
                     if (err) {
