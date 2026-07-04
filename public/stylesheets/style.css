@@ -306,3 +306,38 @@ ul {
 .social_icons a:hover{
     text-decoration: none;
 }
+
+/* Admin forms */
+.admin-form {
+    max-width: 720px;
+}
+
+.admin-form .form-control,
+.admin-form textarea {
+    font-size: 0.95rem;
+}
+
+@media (max-width: 575px) {
+    .admin-form .row > .col,
+    .admin-form .row > [class*="col-"] {
+        margin-bottom: 0.75rem;
+    }
+
+    #return_icon {
+        font-size: 32px;
+    }
+}
+
+/* Pagination */
+.pagination .page-item.active .page-link {
+    background-color: #762933;
+    border-color: #762933;
+}
+
+.pagination .page-link {
+    color: #762933;
+}
+
+.pagination .page-link:hover {
+    color: #a5505b;
+}

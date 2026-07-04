@@ -1,0 +1,20 @@
+<% if (locals.flash_success && flash_success.length) { %>
+<div class="container marketing mt-3">
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+    <i class="bi bi-check-circle-fill me-2"></i> <%= flash_success[0] %>
+    <button type="button" class="close ml-auto" data-dismiss="alert" aria-label="Fechar">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+</div>
+<% } %>
+<% if (locals.flash_error && flash_error.length) { %>
+<div class="container marketing mt-3">
+  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <i class="bi bi-exclamation-triangle-fill me-2"></i> <%= flash_error[0] %>
+    <button type="button" class="close ml-auto" data-dismiss="alert" aria-label="Fechar">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+</div>
+<% } %>

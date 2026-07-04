@@ -16,12 +16,12 @@
 
 <%- include ("partials/header") %>
 
-    <img src="https://wallpaper.dog/large/20542088.jpg" class="img-fluid image_cover">
+    <img src="/images/cover_activities.jpg" class="img-fluid image_cover" alt="BRaNT">
     <div class="container marketing mt-5">
         <a href="/activities"><i class="bi bi-caret-left-fill" id="return_icon"></i></a>
         <br><br>
         <label class="text_color_claret">Add Activitie</label>
-        <form action="/add_activitie" method="post">
+        <form action="/add_activitie" method="post" class="admin-form">
             <input type="hidden" name="_csrf" value="<%= csrfToken %>">
             <label for="exampleFormControlSelect1">Title</label>
             <input type="text" class="form-control mb-3" id="title" name="title" value="" placeholder="Enter title">

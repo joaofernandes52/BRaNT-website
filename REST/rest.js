@@ -24,8 +24,12 @@ module.exports = function (app, team_members, upload, publications, multimedia, 
 
   app.get("/publications", async (req, res, next) => {
     try {
-      const pubs = await publications.find({});
-      res.render("publications", { publication: pubs });
+      const LIMIT = 8;
+      const page = Math.max(1, parseInt(req.query.page) || 1);
+      const total = await publications.countDocuments({});
+      const totalPages = Math.ceil(total / LIMIT);
+      const pubs = await publications.find({}).sort({ date: -1 }).skip((page - 1) * LIMIT).limit(LIMIT);
+      res.render("publications", { publication: pubs, currentPage: page, totalPages });
     } catch (err) { next(err); }
   });
 
@@ -38,8 +42,12 @@ module.exports = function (app, team_members, upload, publications, multimedia, 
 
   app.get("/activities", async (req, res, next) => {
     try {
-      const acts = await activities.find({});
-      res.render("activities", { activities: acts });
+      const LIMIT = 8;
+      const page = Math.max(1, parseInt(req.query.page) || 1);
+      const total = await activities.countDocuments({});
+      const totalPages = Math.ceil(total / LIMIT);
+      const acts = await activities.find({}).sort({ date: -1 }).skip((page - 1) * LIMIT).limit(LIMIT);
+      res.render("activities", { activities: acts, currentPage: page, totalPages });
     } catch (err) { next(err); }
   });
 

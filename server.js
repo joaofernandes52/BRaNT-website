@@ -43,6 +43,7 @@ const ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn;
 const ensureLoggedOut = require('connect-ensure-login').ensureLoggedOut;
 const sessionMiddleware = session({ secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: false });
 const expressSanitizer = require('express-sanitizer');
+const flash = require('connect-flash');
 //-------------------------------------------------------APP CONFIG ------------------------------------------------------------------------
 app.use(methodOverride("_method")); //Permite utilizar o HTTP PUT e DELETE num formulario do lado do cliente
 app.set("view engine", "ejs");
@@ -52,6 +53,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(flash());
 app.use(expressSanitizer());
 //---------------------------------------------------------------------------------------------------------------------------
 const about_us = model.about_us;
@@ -61,8 +63,10 @@ app.use(async (req, res, next) => {
   try {
     const about = await about_us.find({});
     res.locals.about_us = about;
-    res.locals.auth = !!req.user;
+    res.locals.auth = req.user?.role === 'admin';
     res.locals.user = req.user || null;
+    res.locals.flash_success = req.flash('success');
+    res.locals.flash_error = req.flash('error');
     next();
   } catch (err) {
     next(err);
@@ -90,8 +94,14 @@ function verifyCsrf(req, res, next) {
   next();
 }
 
-require('./REST/rest')(app, model.team_members, upload, model.publications, model.multimedia, model.about_us,model.activities);
-require('./REST/dashboard')(app, ensureLoggedIn, verifyCsrf, upload, fs, path, model.publications, model.team_members, model.multimedia, model.about_us, model.ObjectId,model.activities);
+// Garante que o utilizador autenticado tem role admin
+function ensureAdmin(req, res, next) {
+  if (req.user?.role === 'admin') return next();
+  res.redirect('/login');
+}
+
+require('./REST/rest')(app, model.team_members, upload, model.publications, model.multimedia, model.about_us, model.activities);
+require('./REST/dashboard')(app, ensureLoggedIn, ensureAdmin, verifyCsrf, upload, fs, path, model.publications, model.team_members, model.multimedia, model.about_us, model.ObjectId, model.activities);
 
 server.listen(8080, function () {
   console.log('listening on :8080');
@@ -114,8 +124,9 @@ passport.use(new LocalStrategy(async function (username, password, done) {
 
 
 app.get('/login', (req, res) => {
-  const isAuthenticated = !!req.user;
-  res.render(isAuthenticated ? "index" : "login");
+  if (req.user) return res.redirect('/brant');
+  res.locals.flash_error = req.flash('error');
+  res.render("login");
 });
 
 
@@ -124,6 +135,7 @@ app.post(
   passport.authenticate("local", {
     successRedirect: "/brant",
     failureRedirect: "/login",
+    failureFlash: 'Credenciais inválidas. Tenta novamente.',
   })
 );
 
@@ -147,9 +159,12 @@ passport.deserializeUser((id, cb) => {
 
 app.use((err, req, res, next) => {
   if (err.message === 'Tipo de ficheiro não permitido. Usa JPG, PNG, GIF ou WebP.') {
-    return res.status(400).send(err.message);
+    req.flash('error', err.message);
+    return res.redirect('back');
   }
-  next(err);
+  const status = err.status || 500;
+  console.error(err);
+  res.status(status).render('error', { message: status === 500 ? 'Erro interno do servidor.' : err.message, status });
 });
 
 app.all('*', async (req, res, next) => {
