@@ -2,15 +2,11 @@
 
 Website institucional do grupo de investigação **BRaNT** (Brain Research and Neurotechnology), desenvolvido durante um **estágio de verão** e posteriormente melhorado com foco em segurança, qualidade de código e boas práticas de desenvolvimento.
 
----
-
 ## Sobre o Projeto
 
 O BRaNT é um grupo de investigação na área de neurociência e neurotecnologia. Este website foi construído para gerir e apresentar publicamente o trabalho do grupo: membros, publicações, atividades e conteúdos multimédia.
 
 A primeira versão foi desenvolvida como projeto de estágio de verão. Após o estágio, o projeto passou por uma auditoria completa e foram corrigidos 28 findings — de vulnerabilidades críticas de segurança a melhorias de qualidade de código.
-
----
 
 ## Stack
 
@@ -20,8 +16,6 @@ A primeira versão foi desenvolvida como projeto de estágio de verão. Após o 
 - **Autenticação:** Passport.js (Local Strategy)
 - **Frontend:** Bootstrap 4 · Bootstrap Icons
 - **Upload de ficheiros:** Multer
-
----
 
 ## Funcionalidades
 
@@ -35,8 +29,6 @@ A primeira versão foi desenvolvida como projeto de estágio de verão. Após o 
 **Área de administração** (autenticação obrigatória)
 - Adicionar, editar e remover membros, publicações, atividades e multimédia
 - Editar os conteúdos da página principal
-
----
 
 ## Melhorias Pós-Estágio
 
@@ -57,8 +49,6 @@ Após o estágio foi feita uma auditoria completa ao código. Principais melhori
 | Frontend | Título da página de login era "SpaceX" (artifact de tutorial) |
 | Frontend | Imagens placeholder externas substituídas por assets locais |
 | Frontend | Font Awesome substituído por Bootstrap Icons (já incluído) |
-
----
 
 ## Instalação e Setup
 
@@ -116,8 +106,6 @@ npx nodemon server.js
 
 O servidor fica disponível em `http://localhost:8080`.
 
----
-
 ## Estrutura do Projeto
 
 ```
@@ -141,8 +129,6 @@ BRaNT-website/
 ├── .env.example         # Template de configuração
 └── package.json
 ```
-
----
 
 ## Contexto
 
