@@ -57,19 +57,19 @@
                     </div>
                 <% }); %>
 
-        <% if (totalPages > 1) { %>
+        <% if (locals.totalPages > 1) { %>
         <nav class="mt-4" aria-label="Paginação">
           <ul class="pagination justify-content-center">
-            <li class="page-item <%= currentPage === 1 ? 'disabled' : '' %>">
-              <a class="page-link" href="?page=<%= currentPage - 1 %>">Anterior</a>
+            <li class="page-item <%= locals.currentPage === 1 ? 'disabled' : '' %>">
+              <a class="page-link" href="?page=<%= locals.currentPage - 1 %>">Anterior</a>
             </li>
-            <% for (let i = 1; i <= totalPages; i++) { %>
-              <li class="page-item <%= currentPage === i ? 'active' : '' %>">
+            <% for (let i = 1; i <= locals.totalPages; i++) { %>
+              <li class="page-item <%= locals.currentPage === i ? 'active' : '' %>">
                 <a class="page-link" href="?page=<%= i %>"><%= i %></a>
               </li>
             <% } %>
-            <li class="page-item <%= currentPage === totalPages ? 'disabled' : '' %>">
-              <a class="page-link" href="?page=<%= currentPage + 1 %>">Próximo</a>
+            <li class="page-item <%= locals.currentPage === locals.totalPages ? 'disabled' : '' %>">
+              <a class="page-link" href="?page=<%= locals.currentPage + 1 %>">Próximo</a>
             </li>
           </ul>
         </nav>
